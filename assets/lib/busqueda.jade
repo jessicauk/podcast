@@ -1,0 +1,16 @@
+section
+	div
+		form
+			label País
+			input(ng-model="params.pais")
+
+			label Número de items
+			input(ng-model="params.numero")
+
+			label Genero
+			input(ng-model="params.genero")
+
+			label Contenido Explicito
+			input(ng-model="params.contenido")
+
+			button(type="submit", name="busca", ng-click="getData(params)") Busca

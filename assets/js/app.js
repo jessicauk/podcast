@@ -1,4 +1,4 @@
-angular.module('podcastApp',['ui.router','main.module'])
+angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 	.run(['$rootScope', '$http', function ( $rootScope, $http ) {
 		$rootScope.mensaje = "Angular tools";
 		$rootScope.prueba = "Es una pruueba";
@@ -10,12 +10,9 @@ angular.module('podcastApp',['ui.router','main.module'])
 				url : '/',
 				views : {
 					'@': {
-						templateUrl : 'assets/templates/main.html',
+						templateUrl : 'assets/templates/busqueda.html',
 						controller: 'mainController'
 					},
-					//
-					// 'header@index' : {templateUrl: 'assets/templates/header.html',controller: 'mainController'},
-					// 'footer@index' : {templateUrl: 'assets/templates/footer.html',controller: ''}
 				}
 			})
 				.state('index.rss', {
@@ -29,8 +26,35 @@ angular.module('podcastApp',['ui.router','main.module'])
 					controller: ''
 				})
 	}])
-	.controller('mainController', ['$scope', '$rootScope', '$http', function ( $scope, $rootScope, $http ) {
-		
+	.controller('mainController', ['$scope', '$rootScope', '$http','podcastService', function ( $scope, $rootScope, $http, podcastService) {
+		$scope.prueba2 = "Es una prueba y debe de funcionar";
+		$scope.baseUrl = "https://itunes.apple.com/";
+		$scope.params = new Object();
+
+		$scope.getData = function (data) {
+			console.log(angular.toJson(data));
+			podcastService.getRss($scope.baseUrl, data)
+				.success(function (res) {
+					//var parser = new DOMParser();
+					//console.log(angular.toJson(res))
+					parser = new DOMParser();
+    				xmlDoc = parser.parseFromString(res, "text/xml");
+    				var entry = xmlDoc.getElementsByTagName("entry");
+    				for(var x in entry){
+    					var e = entry[x];
+    					var a = e.getElementsByTagName("link");
+    					
+    					console.log(e, " es del dom");
+    					console.log(a, " es del dom aa");
+    					// console.log(d, " es del dom dd");
+    				}
+					
+				})
+				.error(function (error) {
+					console.log(angular.toJson(error))
+
+				})
+		}
 	}])
 	.directive('directiveMenuResponsive', function () {
 		return {  

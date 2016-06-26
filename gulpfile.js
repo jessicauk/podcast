@@ -2,7 +2,7 @@ require('any-promise/register')('bluebird');
 var gulp = require('gulp'),
 	inject = require('gulp-inject'),
 	jade = require('gulp-jade'),
-	concat = require('gulp-concat'),
+	concat = require('gulp-concat'),//
 	uglify = require('gulp-uglify'),
 	stylus = require('gulp-stylus');
 
