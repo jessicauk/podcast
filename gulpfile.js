@@ -25,7 +25,7 @@ gulp.task('js', function () {
 
 //tarea que compila de .style preprocesador a .css
 gulp.task('css', function () {
-  return gulp.src('assets/css/stylus/import.styl')
+  return gulp.src('assets/css/import.styl')
     .pipe(stylus({compress:true}))
     .pipe(gulp.dest('assets/build/'))
 });
@@ -40,8 +40,8 @@ gulp.task('templates', function () {
 //tarea que se ejecuta al tener cambios en los archivos
 gulp.task('watch', function() {
 	gulp.watch('assets/js/**/*.js',['js']);
-	gulp.watch('assets/css/stylus/*.styl', ['css']);
+	gulp.watch('assets/css/*.styl', ['css']);
 	gulp.watch('assets/lib/*.jade', ['templates']);
 });
 
-gulp.task('trabaja', ['watch']);
+gulp.task('podcast', ['watch']);

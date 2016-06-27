@@ -40,11 +40,10 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
     				   {name: "Uruguay", value:"uy"}, {name: "Venezuela", value:"ve"}, {name: "Vietnam", value:"vn"}, {name: "Yemen", value:"ye"},
     				   {name: "Zimbabwe", value:"zw"}];
 
-    	$scope.genero = [{name: "Todo", value:""},{name: "Artes", value:"1301"}, {name: "Artes", value:"1321"}, {name: "Comedia", value:"1303"}, {name: "Educación", value:"1304"}, {name: "Juegos y Hobbies", value:"1323"},
+    	$scope.genero = [{name: "Artes", value:"1301"}, {name: "Artes", value:"1321"}, {name: "Comedia", value:"1303"}, {name: "Educación", value:"1304"}, {name: "Juegos y Hobbies", value:"1323"},
     					{name: "Gobierno y Organizaciones", value:"1325"}, {name: "Salud", value:"1307"}, {name: "Niños y Familia", value:"1305"}, {name: "Música", value:"1310"},
     					{name: "Noticias y Política", value:"1311"}, {name: "Religión", value:"1314"}, {name: "Ciencia y Medicina", value:"1315"}, {name: "Sociedad y cultura", value:"1324"},
-    					{name: "Deportes y Recreación", value:"1316"}, {name: "Tecnología", value:"1318"}, {name: "TV y Películas", value:"1309"}
-    			];
+    					{name: "Deportes y Recreación", value:"1316"}, {name: "Tecnología", value:"1318"}, {name: "TV y Películas", value:"1309"}];
 
     	$scope.items = [10,25,50,100];
 
@@ -55,7 +54,6 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 			// console.log(data, " es la informacion de data")
 			$scope.gather = [];
 			$scope.flag;
-			// console.log(angular.toJson(data));
 			podcastService.getRss($scope.baseUrl, data)
 				.then(function (res) {
 					var xmlDoc = res.data;
@@ -79,8 +77,7 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 		$scope.getPodcast = function (url) {
 			var urlPassed = url;
 			$rootScope.podcastList = [];
-			//$scope.prueba2=[1];
-			//url = "https://itunes.apple.com/us/podcast/grammar-girl-quick-dirty-tips/id173429229?mt=2&ign-mpt=uo%3D2";
+
 			podcastService.getAudio(urlPassed).then(function(promise){
 				//console.log("promesa ", promise.data);
 				var table = promise.data;
@@ -109,42 +106,8 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 			return $sce.trustAsResourceUrl(url);
 		};
 
-		// $scope.rscReady = function () {
-		// 	var r = angular.element(document).find('audio').readyState;
-		// 	(r<=2) ? return false : return true
-		// 	//console.log(r, "valor de audio");
-		// };
-	}])
-	.directive('directiveDescargaXml', function () {
-		return {  
-			restrict:'A',
-			link: function (scope, element, attrs) {
-				$(element).on('click', function () {
-					$lista = $('#list-items');
-					$mresponsive = $('#menu-adapt');	
-					if($mresponsive.hasClass('menu-transform')){
-						$mresponsive.removeClass('menu-transform');
-					}else{
-						$mresponsive.addClass('menu-transform');
-					}
-
-					if($('.text-menu').hasClass('show')) {
-						$('.text-menu').removeClass('show').addClass('hide');
-					}else{
-						setTimeout ( function () {
-							$('.text-menu').removeClass('hide').addClass('show');	
-						}, 500);
-					}
-					$lista.slideToggle('slow', function () {
-						$('#list-items li').on('click', function () {
-							$lista.hide(function () {
-								if($mresponsive.hasClass('menu-transform')){
-									$mresponsive.removeClass('menu-transform')
-								}
-							});
-						});
-					});
-				});
-			}
-		}
-	});
+		$scope.rscReady = function () {
+			var r = angular.element(document).find('audio').readyState;
+			//(r<=2) ? return false : return true
+		};
+	}]);

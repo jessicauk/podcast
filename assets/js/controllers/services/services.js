@@ -2,7 +2,7 @@ angular.module('servicesModule',[])
 	.factory('podcastService',['$http','$q', function ($http, $q) {
 		return {
 			getRss : function (url, data) {
-				if(data.genero === "Todo"){
+				if(data.genero === ""){
 					return $http.get("https://itunes.apple.com/"+data.pais+"/rss/toppodcasts/limit="+data.numero+"/explicit="+data.contenido+"/xml"); 
 				} else {
 					

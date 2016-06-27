@@ -1,24 +1,26 @@
-section(class="container")
+section(class="container podcast")
 	h1 PODCAST APP
 	div
-		form(name="podcastForm")
-			label País
-			select(ng-model="params.pais", ng-options="p.value as p.name for p in pais", required)
-				option(value="") Selecciona
+		form(name="podcastForm", class="row")
+			div(class="col-md-6 col-sm-12 col-xs-12")
+
+				label País
+				select(ng-model="params.pais", ng-options="p.value as p.name for p in pais", required)
+					option(value="") Selecciona
 			
-			label Número de items
-			select(ng-model="params.numero", ng-options="i for i in items", required)
-				option(value="") Selecciona
+				label Número de items
+				select(ng-model="params.numero", ng-options="i for i in items", required)
+					option(value="") Selecciona
+			div(class="col-md-6")
+				label Género
+				select(ng-model="params.genero", ng-options="g.value as g.name for g in genero", required)
+					option(value="") Selecciona
 
-			label Genero
-			select(ng-model="params.genero", ng-options="g.value as g.name for g in genero", required)
-				option(value="") Selecciona
-
-			label Contenido Explicito
-			label Si
-				<input type="radio" ng-model="params.contenido" value="true">
-			label No
-				<input type="radio" ng-model="params.contenido" value="false">
+				label Contenido Explícito
+				label Si
+					<input type="radio" ng-model="params.contenido" value="true">
+				label No
+					<input type="radio" ng-model="params.contenido" value="false">
 
 			p(ng-if="flag") Porfa selecciona las opciones
 

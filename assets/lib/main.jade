@@ -1,7 +1,7 @@
-div
+div(class="lista-primera")
 	article(ng-repeat="item in gather", class="panel panel-default")
 		
-		h2(class="panel-heading") {{item.titulo}}
+		h2(class="panel-heading my-headerr") {{item.titulo}}
 		
 		div(class="panel-body")
 			
@@ -9,7 +9,7 @@ div
 		
 			p(class="artista") Artista : {{item.artista}}
 
-			p(class="categoria") Categoria : {{item.categoria}}
+			p(class="categoria") Categoría : {{item.categoria}}
 
 			p(class="resumen") Resumen : {{item.resumen}}
 
