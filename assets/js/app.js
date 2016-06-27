@@ -15,48 +15,71 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 					},
 				}
 			})
-				.state('index.rss', {
-					url: 'about',
-					templateUrl: "<p>Hola</p>",
-					controller: ''
+				.state('index.busqueda', {
+					url: 'busca',
+					templateUrl: "assets/templates/main.html",
+					controller: 'mainController'
 				})
-				.state('index.work', { //
-					url: 'work',
-					templateUrl: "<p>Que onda</p>",
-					controller: ''
+				.state('index.podcastList', { //
+					url: 'lista',
+					templateUrl: "assets/templates/podcast.html",
+					controller: 'mainController'
 				})
 	}])
-	.controller('mainController', ['$scope', '$rootScope', '$http','podcastService', function ( $scope, $rootScope, $http, podcastService) {
+	.controller('mainController', ['$scope', '$rootScope', '$http','podcastService', '$q', function ( $scope, $rootScope, $http, podcastService, $q) {
 		$scope.prueba2 = "Es una prueba y debe de funcionar";
 		$scope.baseUrl = "https://itunes.apple.com/";
 		$scope.params = new Object();
 
+    
+		//Función que obtiene los datos del formulario, recibe como parametro el objeto
+		$scope.obj = new Object();
 		$scope.getData = function (data) {
+			$scope.gather = [];
 			console.log(angular.toJson(data));
 			podcastService.getRss($scope.baseUrl, data)
-				.success(function (res) {
-					//var parser = new DOMParser();
-					//console.log(angular.toJson(res))
-					parser = new DOMParser();
-    				xmlDoc = parser.parseFromString(res, "text/xml");
-    				var entry = xmlDoc.getElementsByTagName("entry");
-    				for(var x in entry){
-    					var e = entry[x];
-    					var a = e.getElementsByTagName("link");
-    					
-    					console.log(e, " es del dom");
-    					console.log(a, " es del dom aa");
-    					// console.log(d, " es del dom dd");
-    				}
-					
-				})
-				.error(function (error) {
-					console.log(angular.toJson(error))
+				.then(function (res) {
+					var xmlDoc = res.data;
+					$scope.hrefAttr;
+					var a = angular.element(xmlDoc).find('entry').each(function () {
+						$scope.hrefAttr = $(this).find('link').attr('href');
+						$scope.titulo = $(this).find('summary');
+						$scope.artista = $(this).find('im\\:artist, artist').text();
+						$scope.imagen = $(this).find('im\\:image, image')[2].innerHTML;
+						$scope.categoria = $(this).find('category').attr('term');
 
+						//construye objeto para mostrar en la vista principal de la busqueda.
+						$scope.gather.push({url:$scope.hrefAttr, titulo:$scope.titulo, artista:$scope.artista, imagen:$scope.imagen, categoria:$scope.categoria});
+					});
+					console.log(angular.toJson($scope.gather), " si agrego todos");
+				})	
+		}
+
+		$scope.getPodcast = function (url) {
+			var urlPassed = url;
+			$scope.podcastList = [];
+			//url = "https://itunes.apple.com/us/podcast/grammar-girl-quick-dirty-tips/id173429229?mt=2&ign-mpt=uo%3D2";
+			podcastService.getAudio(urlPassed).then(function(promise){
+				//console.log("promesa ", promise.data);
+				var table = promise.data;
+				var t = angular.element(table).find('tr.podcast-episode').each(function() {
+					$scope.descripcion = $(this).children(".release-date").attr('sort-value');
+					$scope.album = $(this).attr('album');
+					$scope.tipo = $(this).attr('kind');
+					$scope.audio = $(this).attr('audio-preview-url');
+					$scope.audioAlbum = $(this).attr('preview-album');
+					$scope.audioArtista = $(this).attr('preview-artist');
+					$scope.audioTitulo = $(this).attr('preview-title');
+					$scope.audioDuracion = $(this).attr('preview-title');
+					$scope.podcastList.push({descripcion:$scope.descripcion, album:$scope.audioAlbum, artista:$scope.audioArtista, titulo:$scope.audioTitulo, duracion:$scope.audioDuracion});
 				})
+				console.log(angular.toJson($scope.podcastList), " si agrego todos los audios");
+
+			})
+			
 		}
 	}])
-	.directive('directiveMenuResponsive', function () {
+	.directive('directiveDescargaXml', function () {
 		return {  
 			restrict:'A',
 			link: function (scope, element, attrs) {
