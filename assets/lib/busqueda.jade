@@ -3,18 +3,23 @@ section
 	div
 		form
 			label País
-			input(ng-model="params.pais")
-
+			select(ng-model="params.pais", ng-options="p.value as p.name for p in pais")
+				option(value="") Selecciona
+			
 			label Número de items
-			input(ng-model="params.numero")
+			select(ng-model="params.numero", ng-options="i for i in items")
+				option(value="") Selecciona
 
 			label Genero
-			input(ng-model="params.genero")
+			select(ng-model="params.genero", ng-options="g.value as g.name for g in genero")
+				option(value="") Selecciona
 
 			label Contenido Explicito
-			input(ng-model="params.contenido")
+			label Si
+				<input type="radio" ng-model="params.contenido" value="true">
+			label No
+				<input type="radio" ng-model="params.contenido" value="false">
 
+			//- input(ng-model="params.contenido")
 			button(type="submit", name="busca", ng-click="getData(params)" ui-sref="index.busqueda") Busca
-
-			button(type="submit", name="busca", ng-click="getPodcast('a')") Busca 2
 	ui-view

@@ -1,6 +1,11 @@
 section 
-	p hola
-	article(ng-repeat="p in podcastList")
-		audio(preload="auto")
-			source(ng-src="{{p.audio}}", type="audio/mpeg") 
-		p {{p.descripcion}}} {{podcastList}}
+	h2 Lista de Audios
+	article(ng-repeat="p in podcastList track by $index")
+		h3 {{p.titulo}}
+		audio(controls, preload="auto")
+			source(ng-src="{{secureAudioUrl(p.audio)}}",type="audio/mpeg") 
+		p {{p.descripcion}}}
+		p {{p.album}}
+		span {{p.tipo}}
+		p {{p.artista}}
+		p {{p.fecha}}
