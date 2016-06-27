@@ -1,17 +1,17 @@
-section
+section(class="container")
 	h1 PODCAST APP
 	div
-		form
+		form(name="podcastForm")
 			label País
-			select(ng-model="params.pais", ng-options="p.value as p.name for p in pais")
+			select(ng-model="params.pais", ng-options="p.value as p.name for p in pais", required)
 				option(value="") Selecciona
 			
 			label Número de items
-			select(ng-model="params.numero", ng-options="i for i in items")
+			select(ng-model="params.numero", ng-options="i for i in items", required)
 				option(value="") Selecciona
 
 			label Genero
-			select(ng-model="params.genero", ng-options="g.value as g.name for g in genero")
+			select(ng-model="params.genero", ng-options="g.value as g.name for g in genero", required)
 				option(value="") Selecciona
 
 			label Contenido Explicito
@@ -20,6 +20,7 @@ section
 			label No
 				<input type="radio" ng-model="params.contenido" value="false">
 
-			//- input(ng-model="params.contenido")
-			button(type="submit", name="busca", ng-click="getData(params)" ui-sref="index.busqueda") Busca
+			p(ng-if="flag") Porfa selecciona las opciones
+
+			button(type="submit", name="busca", ng-click="getData(params)" ui-sref="index.busqueda", required) Busca
 	ui-view

@@ -1,6 +1,6 @@
 section 
 	h2 Lista de Audios
-	article(ng-repeat="p in podcastList track by $index")
+	article(ng-repeat="p in podcastList track by $index", class="panel panel-primary")
 		h3 {{p.titulo}}
 		audio(controls, preload="auto")
 			source(ng-src="{{secureAudioUrl(p.audio)}}",type="audio/mpeg") 

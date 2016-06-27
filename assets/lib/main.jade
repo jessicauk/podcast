@@ -1,11 +1,16 @@
 div
-	article(ng-repeat="item in gather")
-		h2 {{item.titulo}}
-
-		img(class="imagen", ng-src="{{item.imagen}}", ng-click="getPodcast(item.url)", ui-sref="index.podcastList")
+	article(ng-repeat="item in gather", class="panel panel-default")
 		
-		p(class="artista") Artista : {{item.artista}}
+		h2(class="panel-heading") {{item.titulo}}
+		
+		div(class="panel-body")
+			
+			img(class="imagen", ng-src="{{item.imagen}}", ng-click="getPodcast(item.url)", ui-sref="index.podcastList")
+		
+			p(class="artista") Artista : {{item.artista}}
 
-		p(class="categoria") Categoria : {{item.categoria}}
+			p(class="categoria") Categoria : {{item.categoria}}
 
-		p(class="resumen") Resumen : {{item.resumen}}
+			p(class="resumen") Resumen : {{item.resumen}}
+
+			button(ng-click="getPodcast(item.url)", ui-sref="index.podcastList") Ir a listado

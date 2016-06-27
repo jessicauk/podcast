@@ -52,9 +52,10 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 		//Función que obtiene los datos del formulario, recibe como parametro el objeto
 		$scope.obj = new Object();
 		$scope.getData = function (data) {
-			console.log(data, " es la informacion de data")
+			// console.log(data, " es la informacion de data")
 			$scope.gather = [];
-			console.log(angular.toJson(data));
+			$scope.flag;
+			// console.log(angular.toJson(data));
 			podcastService.getRss($scope.baseUrl, data)
 				.then(function (res) {
 					var xmlDoc = res.data;
