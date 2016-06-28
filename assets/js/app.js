@@ -73,7 +73,7 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 					});
 					console.log(angular.toJson($scope.gather), " si agrego todos");
 				})	
-		}
+		}//
 
 		$scope.getPodcast = function (url) {
 			var urlPassed = url;

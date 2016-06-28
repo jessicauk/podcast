@@ -25,7 +25,7 @@ section(class="container podcast")
 				label No
 					<input type="radio" ng-model="params.contenido" value="false">
 
-
+			//- 
 			button(type="submit", class="btn-botonn", name="busca", ng-click="getData(params); submitted=true" ui-sref="index.busqueda", required) Busca
 	//- 
 	img(src="assets/images/loader.gif", class="loader", ng-if="podcastList.gather<0")
