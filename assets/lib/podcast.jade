@@ -1,5 +1,5 @@
 section(class="section-podcast") 
-	img(src="assets/images/loader.gif", class="loader", ng-if="podcastList.length<0")
+	img(src="assets/images/loader.gif", class="loader", ng-show="podcastList.length<0")
 	article(ng-repeat="p in podcastList track by $index", class="panel panel-primary podcasts-audio")
 		div(class="row")
 			h3 {{p.titulo}}

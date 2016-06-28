@@ -61,17 +61,22 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 					var a = angular.element(xmlDoc).find('entry').each(function () {
 						$scope.hrefAttr = $(this).find('link').attr('href');
 						$scope.titulo = $(this).find('title')[0].innerHTML;
-						$scope.resumen = $(this).find('summary')[0].innerHTML;
+						$scope.resumen = $(this).find('summary')[0];
+						if($scope.resumen === undefined) {
+							$scope.resumen = "Sin resumen.";
+						}else{
+							$scope.resumen = $(this).find('summary')[0].innerHTML;
+						}
 						$scope.artista = $(this).find('im\\:artist, artist').text();
 						$scope.imagen = $(this).find('im\\:image, image')[2].innerHTML;
 						$scope.categoria = $(this).find('category').attr('term');
-						console.log($scope.titulo, " titulo");
+						
 
 						//construye objeto para mostrar en la vista principal de la busqueda.
 						$scope.gather.push({url:$scope.hrefAttr, titulo:$scope.titulo, artista:$scope.artista, imagen:$scope.imagen, resumen: $scope.resumen, categoria:$scope.categoria});
 						$scope.flag = true;
 					});
-					console.log(angular.toJson($scope.gather), " si agrego todos");
+					
 				})	
 		}//
 
@@ -96,8 +101,7 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 
 					$rootScope.podcastList.push({fecha:$scope.fecha, tipo: $scope.tipo, descripcion:$scope.descripcion, audio:$scope.audio, album:$scope.audioAlbum, artista:$scope.audioArtista, titulo:$scope.audioTitulo, duracion:$scope.audioDuracion});
 				});
-				console.log(angular.toJson($scope.podcastList), " si agrego todos los audios");
-
+				
 			})
 			
 		}
@@ -109,6 +113,6 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 
 		$scope.rscReady = function () {
 			var r = angular.element(document).find('audio').readyState;
-			//(r<=2) ? return false : return true
+			return true
 		};
 	}]);

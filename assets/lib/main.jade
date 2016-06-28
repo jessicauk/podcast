@@ -5,7 +5,7 @@ div(class="lista-primera")
 		div(class="panel-body")
 			div(class="row contenedor-podcast")
 				div(class="col-md-5 col-sm-12")
-					img(class="imagen", ng-src="{{item.imagen}}", ng-click="getPodcast(item.url)", ui-sref="index.podcastList")
+					img(class="imagen", ng-src="{{secureAudioUrl(item.imagen)}}", ng-click="getPodcast(item.url)", ui-sref="index.podcastList")
 				div(class="col-md-7 col-sm-12 informacion")
 					p(class="artista") Artista : 
 					span {{item.artista}}

@@ -3,6 +3,9 @@ body
 	color: #343C48 
 .podcast
 	background: #FFF
+	.titulo1
+		text-align: center
+	
 	form
 		padding: 15px
 		label
@@ -21,7 +24,7 @@ body
 		.btn-botonn
 			background-color: #E6C973
 			padding: 5px
-			font-size: 15px
+			font-size: 25px
 			box-shadow: 0px 4px 1px #156785
 			//background: palette-azul2 sss
 			color: blanco
@@ -112,10 +115,12 @@ body
 	background: #343C48
 	padding: 20px
 	border-radius: 5px
+	transition: opacity 5s ease-out
 	.podcasts-audio
 		padding: 15px
 		background: #156785
 		border-color: #ffffff
+		animation: podcast 5s
 	.loader
 		width: 50px 
 		height: 50px
@@ -151,4 +156,11 @@ body
 .background-view
 	background-color: #DDD
 	min-height: 100vh
+
+@keyframes podcast
+	from
+		opacity: 0
+		transition: width 1s, height 2s
+	to
+		opacity: 1
 
