@@ -31,7 +31,7 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 		$scope.baseUrl = "https://itunes.apple.com/";
 		$scope.params = new Object();
 
-    	$scope.pais = [{name: "Argentina", value:"ar"}, {name: "Australia", value:"au"}, {name: "Belize", value:"bz"}, {name: "Canada", value:"ca"},
+    	$scope.pais = [{name: "Argentina", value:"ar"}, {name: "Australia", value:"au"}, {name: "Canada", value:"ca"},
     				   {name: "China", value:"cn"}, {name: "Colombia", value:"co"},{name: "Estados Unidos", value:"us"}, {name: "España", value:"es"},
     				   {name: "Francia", value:"fr"}, {name: "Grecia", value:"gr"}, {name: "Italia", value:"it"},{name: "Japon", value:"jp"}, 
     				   {name: "Korea", value:"kr"}, {name: "Mexico", value:"mx"}, {name: "Nicaragua", value:"ni"}, {name: "Nueva Zelanda", value:"nz"},
@@ -47,13 +47,13 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 
     	$scope.items = [10,25,50,100];
 
-   
+   		
 		//Función que obtiene los datos del formulario, recibe como parametro el objeto
 		$scope.obj = new Object();
 		$scope.getData = function (data) {
 			// console.log(data, " es la informacion de data")
 			$scope.gather = [];
-			$scope.flag;
+			$scope.flag = false;
 			podcastService.getRss($scope.baseUrl, data)
 				.then(function (res) {
 					var xmlDoc = res.data;
@@ -69,6 +69,7 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 
 						//construye objeto para mostrar en la vista principal de la busqueda.
 						$scope.gather.push({url:$scope.hrefAttr, titulo:$scope.titulo, artista:$scope.artista, imagen:$scope.imagen, resumen: $scope.resumen, categoria:$scope.categoria});
+						$scope.flag = true;
 					});
 					console.log(angular.toJson($scope.gather), " si agrego todos");
 				})	
@@ -77,7 +78,7 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 		$scope.getPodcast = function (url) {
 			var urlPassed = url;
 			$rootScope.podcastList = [];
-
+			$scope.f = false;
 			podcastService.getAudio(urlPassed).then(function(promise){
 				//console.log("promesa ", promise.data);
 				var table = promise.data;
@@ -93,7 +94,7 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 					$scope.audioDuracion = $(this).attr('preview-title');
 					$scope.fecha = $(this).find(".release-date").attr('sort-value');
 
-					$rootScope.podcastList.push({fecha:$scope.fecha, descripcion:$scope.descripcion, audio:$scope.audio, album:$scope.audioAlbum, artista:$scope.audioArtista, titulo:$scope.audioTitulo, duracion:$scope.audioDuracion});
+					$rootScope.podcastList.push({fecha:$scope.fecha, tipo: $scope.tipo, descripcion:$scope.descripcion, audio:$scope.audio, album:$scope.audioAlbum, artista:$scope.audioArtista, titulo:$scope.audioTitulo, duracion:$scope.audioDuracion});
 				});
 				console.log(angular.toJson($scope.podcastList), " si agrego todos los audios");
 

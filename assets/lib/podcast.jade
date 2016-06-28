@@ -1,11 +1,17 @@
-section 
-	h2 Lista de Audios
-	article(ng-repeat="p in podcastList track by $index", class="panel panel-primary")
-		h3 {{p.titulo}}
-		audio(controls, preload="auto")
-			source(ng-src="{{secureAudioUrl(p.audio)}}",type="audio/mpeg") 
-		p {{p.descripcion}}}
-		p {{p.album}}
-		span {{p.tipo}}
-		p {{p.artista}}
-		p {{p.fecha}}
+section(class="section-podcast") 
+	img(src="assets/images/loader.gif", class="loader", ng-if="podcastList.length<0")
+	article(ng-repeat="p in podcastList track by $index", class="panel panel-primary podcasts-audio")
+		div(class="row")
+			h3 {{p.titulo}}
+			div(class="col-md-6")
+				audio(controls, preload="auto", class="col-md-10 col-sm-10 col-xs-12")
+					source(ng-src="{{secureAudioUrl(p.audio)}}",type="audio/mpeg")
+			div(class="col-md-6")
+				span * Album 
+				p {{p.album}}
+				span * Tipo 
+				p {{p.tipo}}
+				span * Artista 
+				p {{p.artista}}
+				span * Fecha 
+				p {{p.fecha}}

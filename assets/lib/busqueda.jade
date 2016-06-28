@@ -5,16 +5,19 @@ section(class="container podcast")
 			div(class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3")
 				
 				label País
-				select(ng-model="params.pais", ng-options="p.value as p.name for p in pais", required)
+				select(ng-model="params.pais", ng-options="p.value as p.name for p in pais", name="pais" required)
 					option(value="") Selecciona
+				span(ng-show="submitted && podcastForm.pais.$error.required", class="messagge") ¡Selecciona un país!
 			
 				label Número de items
-				select(ng-model="params.numero", ng-options="i for i in items", required)
+				select(ng-model="params.numero", ng-options="i for i in items", name="numero" required) 
 					option(value="") Selecciona
+				span(ng-show="submitted && podcastForm.numero.$error.required", class="messagge") ¡Selecciona un número!
 			div(class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3")
 				label Género
-				select(ng-model="params.genero", ng-options="g.value as g.name for g in genero", required)
+				select(ng-model="params.genero", ng-options="g.value as g.name for g in genero", name="genero" required)
 					option(value="") Selecciona
+				span(ng-show="submitted && podcastForm.genero.$error.required", class="messagge") ¡Selecciona un genéro!
 
 				label Contenido Explícito
 				label Si
@@ -22,7 +25,9 @@ section(class="container podcast")
 				label No
 					<input type="radio" ng-model="params.contenido" value="false">
 
-			p(ng-if="flag") Porfa selecciona las opciones
 
-			button(type="submit", name="busca", ng-click="getData(params)" ui-sref="index.busqueda", required) Busca
+			button(type="submit", class="btn-botonn", name="busca", ng-click="getData(params); submitted=true" ui-sref="index.busqueda", required) Busca
+	
+	img(src="assets/images/loader.gif", class="loader", ng-if="podcastList.gather<0")
+
 	ui-view

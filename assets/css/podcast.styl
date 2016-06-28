@@ -11,12 +11,15 @@ body
 			color: #343C48
 			font-size: 18px
 			display: block
+		.messagge
+			color: red
+			font-size: 15
 		select
 			width: 35%
 			display: block
 			@media screen and (max-width: 500px)
 				width: 70%
-		button
+		.btn-botonn
 			background-color: #E6C973
 			padding: 5px
 			font-size: 15px
@@ -42,15 +45,111 @@ body
 			&:hover
 				background-color: #f1c851
 				transition: .3s ease-in-out
+				//color: #FFF
 .my-headerr
 	margin-top: 0px
+	text-align: center
+	
+.panel-default, .panel-default>.panel-heading
+	border-color: #343C48
 	
 .lista-primera
+	.contenedor-podcast
+		padding: 25px
 	.panel-heading
-		background: #2AC7CB
-		color: #343C48
+		color: #FFF
+		background-color: #343C48
+	img
+		cursor: pointer
+		transition: transform 0.5s
+		margin: 18% auto
+		display: block
+		border-radius: 50%
+		&:hover
+			transform: scale(1.1)
+			background: #000
+			transition: box-shadow, background, transform 0.5s ease-out
+			box-shadow: 0 0 40px #292828
+	.informacion
+		.resumen
+			text-align: justify
+		p
+			color: #0db4f1
+			font-size: 25px
+			font-weight: 400
+		span
+			font-size: 18px
+		@media screen and (max-width: 640px)
+			margin-top: 30px
+	button
+		background-color: #E6C973
+		padding: 5px
+		font-size: 15px
+		box-shadow: 0px 4px 1px #156785
+		color: blanco
+		border: none
+		border-radius: 3px
+		cursor: pointer
+		text-align: center
+		outline: none
+		margin: 8% 0 auto
+		display: block
+		@media screen and (max-width: 995px)
+			display: block
+			margin: 0 auto
+		&:active
+			background-color: #f1c851
+			transition: .3s ease-in-out
+			transform: translateY(2px)
+			box-shadow: 0 2px #156785
+			// line-height: 3px
+		&:hover
+			background-color: #f1c851
+			transition: .3s ease-in-out
+			//color: #8a5105
+		
+			
+.section-podcast
+	background: #343C48
+	padding: 20px
+	border-radius: 5px
+	.podcasts-audio
+		padding: 15px
+		background: #156785
+		border-color: #ffffff
+	.loader
+		width: 50px 
+		height: 50px
+		margin: 0 auto
+		display: block
+	h3
+		color: #FFF
+		font-size: 22px
+		margin: 2% auto
+		margin-left: 15px
+	span, label
+		color: #FFF
+	span
+		font-size: 20px
+		&:nth-of-type(1)
+			color: #17dab6
+		&:nth-of-type(2)
+			color: #b3da17
+		&:nth-of-type(3)
+			color: #fd7aed
+		&:nth-of-type(4)
+			color: #f19240
+	p
+		margin-left: 15px
+		color: #FFF
+		border-bottom: 2px solid #343c48
+		padding: 5px 0 5px 56px
+		font-size: 18px
+	audio 
+		margin: 20% auto
 		
 			
 .background-view
 	background-color: #DDD
 	min-height: 100vh
+

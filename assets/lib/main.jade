@@ -1,16 +1,19 @@
 div(class="lista-primera")
-	article(ng-repeat="item in gather", class="panel panel-default")
-		
+	article(ng-repeat="item in gather", class="panel panel-default podcasts-audio")
 		h2(class="panel-heading my-headerr") {{item.titulo}}
 		
 		div(class="panel-body")
-			
-			img(class="imagen", ng-src="{{item.imagen}}", ng-click="getPodcast(item.url)", ui-sref="index.podcastList")
-		
-			p(class="artista") Artista : {{item.artista}}
+			div(class="row contenedor-podcast")
+				div(class="col-md-5 col-sm-12")
+					img(class="imagen", ng-src="{{item.imagen}}", ng-click="getPodcast(item.url)", ui-sref="index.podcastList")
+				div(class="col-md-7 col-sm-12 informacion")
+					p(class="artista") Artista : 
+					span {{item.artista}}
 
-			p(class="categoria") Categoría : {{item.categoria}}
+					p(class="categoria") Categoría : 
+					span {{item.categoria}}
 
-			p(class="resumen") Resumen : {{item.resumen}}
+					p(class="resumen") Resumen : 
+					span {{item.resumen}}
 
-			button(ng-click="getPodcast(item.url)", ui-sref="index.podcastList") Ir a listado
+					button(ng-click="getPodcast(item.url)", ui-sref="index.podcastList", class="btn-botonn") Ir a podcasts
