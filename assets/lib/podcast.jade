@@ -4,8 +4,8 @@ section(class="section-podcast")
 		div(class="row")
 			h3 {{p.titulo}}
 			div(class="col-md-6")
-				audio(controls, preload="auto", class="col-md-10 col-sm-10 col-xs-12")
-					source(ng-src="{{secureAudioUrl(p.audio)}}",type="audio/mpeg")
+				audio(controls, id="player1", preload="auto", class="col-md-10 col-sm-10 col-xs-12")
+					source(id="mp3", ng-src="{{secureAudioUrl(p.audio)}}",type="audio/mpeg")
 			div(class="col-md-6")
 				span * Album 
 				p {{p.album}}

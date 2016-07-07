@@ -106,6 +106,30 @@ angular.module('podcastApp',['ui.router','main.module', 'servicesModule'])
 			
 		}
 
+		$("#player1").on("click", function () {
+		    //I've tried catching the error like this - no effect
+		    alert("Trying to play file.");
+		    try {
+		        $('audio')[0].play();
+		    } catch (e) {
+		        alert("Error playing file!");
+		    }
+		});
+		   	
+		var a = $('audio');
+		console.log(a, " es el valor del audio")
+
+		$("audio").on("error", function (e) {
+		        console.log("Error at audio tag level!");
+		    });
+
+		// try this then
+		$("#wav").on("error", function (e) {
+		        console.log("Error with wav file!");
+		    });
+		$("#mp3").on("error", function (e) {
+		        console.log("Error with mp3 file!");
+		    })
 		//Recurso de audio confiable https
 		$scope.secureAudioUrl = function (url) {
 			return $sce.trustAsResourceUrl(url);
